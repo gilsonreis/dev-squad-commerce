@@ -2,11 +2,19 @@
 
 namespace App\Admin\Http\Controllers;
 
+use App\Http\Repository\Product\ProductRepository;
 use App\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends AdminController
 {
+    private $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class ProductController extends AdminController
      */
     public function index()
     {
-        return view('admin.product.index');
+        return view('admin.product.index', [
+            'products' => $this->productRepository->getAll()
+        ]);
     }
 
     /**

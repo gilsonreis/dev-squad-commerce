@@ -23,4 +23,9 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::orderBy('title', 'desc')
             ->paginate($maxItemsPerPage);
     }
+
+    public function create(array $data): void
+    {
+        Product::created($data);
+    }
 }

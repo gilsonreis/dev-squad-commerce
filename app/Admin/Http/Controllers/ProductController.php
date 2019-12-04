@@ -2,18 +2,31 @@
 
 namespace App\Admin\Http\Controllers;
 
-use App\Http\Repository\Product\ProductRepository;
+use App\Http\Repository\Category\CategoryRepositoryInterface;
 use App\Http\Repository\Product\ProductRepositoryInterface;
+use App\Http\Requests\ProductRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends AdminController
 {
     private $productRepository;
+    private $categoryRepository;
+    private $categories;
 
-    public function __construct(ProductRepositoryInterface $productRepository)
+    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository)
     {
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
         parent::__construct();
+    }
+
+    public function callAction($method, $parameters)
+    {
+        if (in_array($method, ['create', 'update'])) {
+            $this->getCategories();
+        }
+        return parent::callAction($method, $parameters);
     }
 
     /**
@@ -39,24 +52,28 @@ class ProductController extends AdminController
      */
     public function create()
     {
-        //
+        $product = new Product();
+        return view("admin.product.create", [
+            'product' => $product,
+            'categories' => $this->categories
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ProductRequest $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $this->productRepository->create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -67,7 +84,7 @@ class ProductController extends AdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -78,8 +95,8 @@ class ProductController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
@@ -90,11 +107,17 @@ class ProductController extends AdminController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
     {
         //
     }
+
+    private function getCategories()
+    {
+        $this->categories = $this->categoryRepository->getAll()->pluck('name', 'id');
+    }
+
 }

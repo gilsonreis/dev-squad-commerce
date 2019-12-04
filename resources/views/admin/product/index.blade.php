@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Products - ')
+
 @section('content')
     <h1 class="display-4">Products</h1>
     <hr>

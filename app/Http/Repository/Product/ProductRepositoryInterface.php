@@ -4,9 +4,9 @@
 namespace App\Http\Repository\Product;
 
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface ProductRepositoryInterface
 {
-    public function getAll(): Collection;
+    public function getAll(?string $search, int $maxItemsPerPage): LengthAwarePaginator;
 }

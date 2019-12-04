@@ -3,14 +3,14 @@
 namespace App\Admin\Http\Controllers;
 
 use App\Http\Repository\Product\ProductRepository;
-use App\Product;
+use App\Http\Repository\Product\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ProductController extends AdminController
 {
     private $productRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
         parent::__construct();
@@ -21,10 +21,14 @@ class ProductController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('q');
+        $products = $this->productRepository->getAll($search, $this->productRepository::MAX_ITEMS_PER_PAGE);
+
         return view('admin.product.index', [
-            'products' => $this->productRepository->getAll()
+            'products' => $products,
+            'search' => $search
         ]);
     }
 

@@ -5,13 +5,22 @@ namespace App\Http\Repository\Product;
 
 
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductRepository implements ProductRepositoryInterface
 {
+    const MAX_ITEMS_PER_PAGE = 10;
 
-    public function getAll(): Collection
+    public function getAll(?string $search, int $maxItemsPerPage): LengthAwarePaginator
     {
-        return Product::get();
+        if(!is_null($search)) {
+            return Product::where('title', 'like', '%' . $search . '%')
+                ->orderBy("title", 'asc')
+                ->paginate($maxItemsPerPage)
+                ->appends(['q' => $search]);
+        }
+
+        return Product::orderBy('title', 'desc')
+            ->paginate($maxItemsPerPage);
     }
 }

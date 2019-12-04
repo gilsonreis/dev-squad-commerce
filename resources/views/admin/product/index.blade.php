@@ -4,7 +4,19 @@
     <h1 class="display-4">Products</h1>
     <hr>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+            <form action="">
+                <div class="row">
+                    <div class="col">
+                        <input type="search" value="{{ $search  }}" name="q" placeholder="Search ..." class="form-control ">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-secondary">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
             <a href="{{ route('admin.products.create') }}" class="btn btn-primary float-right">New Product</a>
         </div>
     </div>
@@ -35,4 +47,5 @@
         @endforeach
         </tbody>
     </table>
+    {{ $products->links() }}
 @endsection

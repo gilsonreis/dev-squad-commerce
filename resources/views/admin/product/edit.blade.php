@@ -1,13 +1,13 @@
 @extends("layouts.admin")
-@section('title', 'Create a new product - ')
+@section('title', 'Edit Product - ' . $product->title . ' - ')
 
 @section("content")
-    <h1 class="display-4">Create a new product</h1>
+    <h1 class="display-4">Edit Product - <small>{{ $product->title }}</small></h1>
     <hr>
     @include("admin.partials._validations_messages")
     <div class="row">
         <div class="col">
-            {!! Form::model($product, ['route' => 'admin.products.store', 'method' => 'post', 'files' => true]) !!}
+            {!! Form::model($product, ['route' => ['admin.products.update', $product], 'method' => 'put', 'files' => true]) !!}
                 @include("admin.product._form")
             {!! Form::close() !!}
         </div>

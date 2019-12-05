@@ -23,7 +23,7 @@ class ProductController extends AdminController
 
     public function callAction($method, $parameters)
     {
-        if (in_array($method, ['create', 'update'])) {
+        if (in_array($method, ['create', 'edit'])) {
             $this->getCategories();
         }
         return parent::callAction($method, $parameters);
@@ -67,7 +67,9 @@ class ProductController extends AdminController
      */
     public function store(ProductRequest $request)
     {
-        $this->productRepository->create($request->all());
+        $this->productRepository->persist($request->all());
+        $request->session()->flash('success', 'The Product has saved successfully!');
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -78,7 +80,9 @@ class ProductController extends AdminController
      */
     public function show(Product $product)
     {
-        //
+        return view("admin.product.show", [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -89,30 +93,42 @@ class ProductController extends AdminController
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit', [
+            'product' => $product,
+            'categories' => $this->categories
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Product $product
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $this->productRepository->persist($request->all(), $product->id);
+        $request->session()->flash('success', 'The Product has updated successfully!');
+        return redirect()->route('admin.products.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Product $product
+     * @param ProductRequest $request
+     * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Request $request, Product $product)
     {
-        //
+        if (!$this->productRepository->destroy($product)) {
+            $request->session()->flash('danger', 'Any error happing while ');
+            return redirect()->route('admin.products.index');
+        }
+
+        $request->session()->flash('success', 'The Product has deleted successfully!');
+        return redirect()->route('admin.products.index');
     }
 
     private function getCategories()

@@ -6,6 +6,8 @@ use App\Http\Repository\Category\CategoryRepository;
 use App\Http\Repository\Category\CategoryRepositoryInterface;
 use App\Http\Repository\Product\ProductRepository;
 use App\Http\Repository\Product\ProductRepositoryInterface;
+use App\Models\Product;
+use App\Observers\ProductObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Product::observe(ProductObserver::class);
     }
 }

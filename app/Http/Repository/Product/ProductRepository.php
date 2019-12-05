@@ -6,6 +6,7 @@ namespace App\Http\Repository\Product;
 
 use App\Models\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -20,12 +21,23 @@ class ProductRepository implements ProductRepositoryInterface
                 ->appends(['q' => $search]);
         }
 
-        return Product::orderBy('title', 'desc')
+        return Product::orderBy('title', 'asc')
             ->paginate($maxItemsPerPage);
     }
 
-    public function create(array $data): void
+    public function persist(array $data, int $id = null): void
     {
-        Product::created($data);
+        if(is_null($id)) {
+            Product::create($data);
+        } else {
+            $product = Product::findOrFail($id);
+            $product->fill($data);
+            $product->save();
+        }
+    }
+
+    public function destroy(Product $product): bool
+    {
+        return $product->delete();
     }
 }

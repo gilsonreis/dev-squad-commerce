@@ -5,6 +5,7 @@
 @section('content')
     <h1 class="display-4">Products</h1>
     <hr>
+    @include("admin.partials._messages")
     <div class="row">
         <div class="col-md-6">
             <form action="">
@@ -49,5 +50,6 @@
         @endforeach
         </tbody>
     </table>
+    <hr>
     {{ $products->links() }}
 @endsection

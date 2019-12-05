@@ -24,10 +24,10 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        $rule_image = 'required|image|mimes:png,jpg';
+        $rule_image = 'required|image|mimes:png,jpg,jpeg';
         $rule_title = 'required|max:64|unique:products,title';
         if($this->method() == "PUT") {
-            $rule_image = 'image|mimes:png,jpg';
+            $rule_image = 'image|mimes:png,jpg,jpeg';
             $rule_title = 'required|max:64|unique:products,title,' . $this->route()->parameter('product')->id;
         }
 
@@ -36,7 +36,7 @@ class ProductRequest extends FormRequest
             'slug' => 'max:64|alpha_dash',
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|min:0.01|numeric',
-//            'photo' => $rule_image
+            'photo' => $rule_image
         ];
     }
 }

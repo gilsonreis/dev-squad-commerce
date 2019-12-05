@@ -5,11 +5,14 @@ namespace App\Admin\Http\Controllers;
 use App\Http\Repository\Category\CategoryRepositoryInterface;
 use App\Http\Repository\Product\ProductRepositoryInterface;
 use App\Http\Requests\ProductRequest;
+use App\Http\Services\ImageUploadTrait;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends AdminController
 {
+    use ImageUploadTrait;
+
     private $productRepository;
     private $categoryRepository;
     private $categories;
@@ -67,7 +70,9 @@ class ProductController extends AdminController
      */
     public function store(ProductRequest $request)
     {
-        $this->productRepository->persist($request->all());
+        $data = $request->all();
+        $data['photo'] = $this->handleUploadImage($request->file('photo'), 800, 800);
+        $this->productRepository->persist($data);
         $request->session()->flash('success', 'The Product has saved successfully!');
         return redirect()->route('admin.products.index');
     }
@@ -108,7 +113,14 @@ class ProductController extends AdminController
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $this->productRepository->persist($request->all(), $product->id);
+        $data = $request->all();
+
+        if (file_exists(public_path($this->path . $product->photo))) {
+            unlink(public_path($this->path . $product->photo));
+        }
+
+        $data['photo'] = $this->handleUploadImage($request->file('photo'), 800, 800);
+        $this->productRepository->persist($data, $product->id);
         $request->session()->flash('success', 'The Product has updated successfully!');
         return redirect()->route('admin.products.index');
     }
@@ -123,6 +135,9 @@ class ProductController extends AdminController
     public function destroy(Request $request, Product $product)
     {
         if (!$this->productRepository->destroy($product)) {
+            if (file_exists(public_path($this->path . $product->photo))) {
+                unlink(public_path($this->path . $product->photo));
+            }
             $request->session()->flash('danger', 'Any error happing while ');
             return redirect()->route('admin.products.index');
         }

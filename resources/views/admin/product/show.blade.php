@@ -30,7 +30,7 @@
                     <th>Image</th>
                     <td colspan="3">
                         <div class="col">
-                            <img class="img-responsive img-thumbnail" width="300" src="{{url(isset($product->photo) ? "/uploads/products/thumbs/" .$product->photo : "/images/no-image.png")}}" alt="">
+                            <img class="img-responsive img-thumbnail" width="300" src="{{url(isset($product->photo) ? "/uploads/products/" .$product->photo : "/images/no-image.png")}}" alt="">
                         </div>
                     </td>
                 </tr>

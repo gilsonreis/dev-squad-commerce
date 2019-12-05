@@ -42,9 +42,11 @@
                 <td>{{ $product->category->name }}</td>
                 <td>{{ number_format($product->price, 2) }}</td>
                 <td>
-                    <a title="View Product" href="{{ route('admin.products.show', $product)  }}" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></a>
-                    <a title="Edit Product" href="{{ route('admin.products.edit', $product)  }}" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
-                    <a title="Delete Product" href="{{ route('admin.products.destroy', $product)  }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                    <a title='View Product "{{ $product->title }}"' href="{{ route('admin.products.show', $product)  }}" class="btn btn-sm btn-warning float-left mr-1"><i class="fa fa-eye"></i></a>
+                    <a title='Edit Product "{{ $product->title }}"' href="{{ route('admin.products.edit', $product)  }}" class="btn btn-sm btn-success float-left mr-1"><i class="fa fa-pencil"></i></a>
+                    {!! Form::open(['route' => ['admin.products.destroy', $product], 'method' => 'delete', 'onsubmit' => "javascript: return confirm('Are you sure delete product \"{$product->title}\"?');", 'class' => 'float-left']) !!}
+                        <button title='Delete Product "{{ $product->title }}"' type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                    {!! Form::close() !!}
                 </td>
             </tr>
         @endforeach

@@ -13,4 +13,9 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         return Category::orderBy('name', 'asc')->get();
     }
+
+    public function getCategoryByName(string $name): Category
+    {
+        return Category::where('name', $name)->first();
+    }
 }

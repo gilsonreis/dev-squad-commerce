@@ -138,7 +138,7 @@ class ProductController extends AdminController
             if (file_exists(public_path($this->path . $product->photo))) {
                 unlink(public_path($this->path . $product->photo));
             }
-            $request->session()->flash('danger', 'Any error happing while ');
+            $request->session()->flash('danger', 'Any error happing while delete product');
             return redirect()->route('admin.products.index');
         }
 
@@ -149,6 +149,11 @@ class ProductController extends AdminController
     private function getCategories()
     {
         $this->categories = $this->categoryRepository->getAll()->pluck('name', 'id');
+    }
+
+    public function importProduct()
+    {
+
     }
 
 }

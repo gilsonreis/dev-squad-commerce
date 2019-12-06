@@ -21,7 +21,7 @@ class ProductRepository implements ProductRepositoryInterface
                 ->appends(['q' => $search]);
         }
 
-        return Product::orderBy('title', 'asc')
+        return Product::orderBy($order[0], $order[1])
             ->paginate($maxItemsPerPage);
     }
 

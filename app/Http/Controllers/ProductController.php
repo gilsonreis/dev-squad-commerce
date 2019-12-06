@@ -17,7 +17,6 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $search = $request->get('q');
-        return $this->productRepository->getAll($search, ProductRepository::MAX_ITEMS_PER_PAGE);
+        return $this->productRepository->getAll(null, ProductRepository::MAX_ITEMS_PER_PAGE, ['created_at', 'desc']);
     }
 }

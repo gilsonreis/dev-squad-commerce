@@ -32,7 +32,7 @@
 <div class="form-group row">
     @if(isset($product->photo))
         <div class="col">
-            <img class="img-responsive img-thumbnail" width="200" src="{{url("uploads/products/" . $product->photo)}}" alt="">
+            <img class="img-responsive img-thumbnail" src="{{url("uploads/products/thumb/" . $product->photo)}}" alt="">
             <label class="control-label">Current Image</label>
         </div>
     @endif

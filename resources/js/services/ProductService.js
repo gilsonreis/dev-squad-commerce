@@ -1,1 +1,5 @@
-export const getAll = () => window.axios.get("/api/products");
+export const getAll = (page) => window.axios.get("/api/products", {
+    params: {
+        page: page,
+    },
+});

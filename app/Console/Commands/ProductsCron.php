@@ -7,7 +7,6 @@ use App\Http\Repository\ImportProductSchedulers\ImportProductSchedulersRepositor
 use App\Http\Repository\Product\ProductRepositoryInterface;
 use App\Http\Repository\User\UserRepositoryInterface;
 use App\Mail\ImportedProducts;
-use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Mail;

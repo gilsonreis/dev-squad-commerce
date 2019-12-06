@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 // Authentication Routes...
 Auth::routes(['register' => false, 'reset' => false]);
@@ -30,4 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('products', '\App\Admin\Http\Controllers\ProductController');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('api')->name('api.')->group(function () {
+    Route::get('/categories', 'CategoryController@index')->name("category.index");
+    Route::get('/products', 'ProductController@index')->name("product.index");
+});

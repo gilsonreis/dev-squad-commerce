@@ -83,6 +83,7 @@ class ProductController extends AdminController
     {
         $data = $request->all();
         $data['photo'] = $this->handleUploadImage($request->file('photo'), 800, 800);
+        $data['photo'] = $this->handleUploadImage($request->file('photo'), 300, 300, $this->path . "/thumb/");
         $this->productRepository->persist($data);
         $request->session()->flash('success', 'The Product has saved successfully!');
         return redirect()->route('admin.products.index');
@@ -126,11 +127,14 @@ class ProductController extends AdminController
     {
         $data = $request->all();
 
-        if (file_exists(public_path($this->path . $product->photo))) {
+        if (isset($product->photo) && file_exists(public_path($this->path . $product->photo))) {
             unlink(public_path($this->path . $product->photo));
+            unlink(public_path($this->path . '/thumb/' . $product->photo));
         }
 
+        $this->handleUploadImage($request->file('photo'), 300, 300, $this->path . "/thumb/");
         $data['photo'] = $this->handleUploadImage($request->file('photo'), 800, 800);
+
         $this->productRepository->persist($data, $product->id);
         $request->session()->flash('success', 'The Product has updated successfully!');
         return redirect()->route('admin.products.index');

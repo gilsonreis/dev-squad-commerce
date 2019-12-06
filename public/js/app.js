@@ -1933,6 +1933,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProductListComponent",
@@ -38085,15 +38086,18 @@ var render = function() {
           _c("div", { staticClass: "product-box2" }, [
             _c("div", { staticClass: "media" }, [
               _c("a", { staticClass: "pull-left", attrs: { href: "#" } }, [
-                _c("img", {
-                  staticClass: "img-responsive",
-                  attrs: {
-                    src: _vm.products.photo
-                      ? "/uploads/product/" + _vm.products.photo
-                      : "/images/no-image.png",
-                    alt: "product"
-                  }
-                })
+                product.photo
+                  ? _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/uploads/products/thumb/" + product.photo,
+                        alt: "product"
+                      }
+                    })
+                  : _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: { src: "/images/no-image.png", alt: "product" }
+                    })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "media-body" }, [

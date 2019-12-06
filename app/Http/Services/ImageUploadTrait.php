@@ -11,8 +11,9 @@ trait ImageUploadTrait
 {
     protected $path = "/uploads/products/";
 
-    public function handleUploadImage($image, $w = 200, $h = 200)
+    public function handleUploadImage($image, $w = 200, $h = 200, $path = null)
     {
+        $this->path = $path ?? $this->path;
         if (!is_dir(public_path($this->path))) {
             mkdir(public_path($this->path), 0755, true);
         }

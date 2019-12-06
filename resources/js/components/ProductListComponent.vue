@@ -4,7 +4,8 @@
             <div class="product-box2">
                 <div class="media">
                     <a class="pull-left" href="#">
-                        <img class="img-responsive" :src="products.photo ? '/uploads/product/' + products.photo : '/images/no-image.png'" alt="product" />
+                        <img class="img-responsive" v-if="product.photo" :src="'/uploads/products/thumb/' + product.photo" alt="product" />
+                        <img class="img-responsive" v-else src="/images/no-image.png" alt="product" />
                     </a>
                     <div class="media-body">
                         <div class="product-box2-content">

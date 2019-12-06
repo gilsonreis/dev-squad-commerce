@@ -12,11 +12,11 @@ class ProductRepository implements ProductRepositoryInterface
 {
     const MAX_ITEMS_PER_PAGE = 10;
 
-    public function getAll(?string $search, int $maxItemsPerPage): LengthAwarePaginator
+    public function getAll(?string $search, int $maxItemsPerPage, array $order = ['title', 'asc']): LengthAwarePaginator
     {
         if(!is_null($search)) {
             return Product::where('title', 'like', '%' . $search . '%')
-                ->orderBy("title", 'asc')
+                ->orderBy($order[0], $order[1])
                 ->paginate($maxItemsPerPage)
                 ->appends(['q' => $search]);
         }

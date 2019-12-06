@@ -3,24 +3,35 @@
 namespace App\Admin\Http\Controllers;
 
 use App\Http\Repository\Category\CategoryRepositoryInterface;
+use App\Http\Repository\ImportProductSchedulers\ImportProductSchedulersRepositoryInterface;
 use App\Http\Repository\Product\ProductRepositoryInterface;
+use App\Http\Requests\ImportProductSchedulersRequest;
 use App\Http\Requests\ProductRequest;
 use App\Http\Services\ImageUploadTrait;
+use App\Http\Services\ProductCsvUpload;
+use App\Models\ImportProductSchedulers;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends AdminController
 {
-    use ImageUploadTrait;
+    use ImageUploadTrait, ProductCsvUpload;
 
     private $productRepository;
     private $categoryRepository;
+    private $importProductSchedulersRepository;
     private $categories;
 
-    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository)
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        CategoryRepositoryInterface $categoryRepository,
+        ImportProductSchedulersRepositoryInterface $importProductSchedulersRepository
+    )
     {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->importProductSchedulersRepository = $importProductSchedulersRepository;
         parent::__construct();
     }
 
@@ -146,14 +157,29 @@ class ProductController extends AdminController
         return redirect()->route('admin.products.index');
     }
 
+    public function importProduct()
+    {
+        return view("admin.product.import-csv", [
+            'file' => new ImportProductSchedulers()
+        ]);
+    }
+
+    public function importProductStore(ImportProductSchedulersRequest $request)
+    {
+        $data = $request->all();
+
+        $filename = $this->handleUpload($data['file_name']);
+        $data['file_name'] = $filename;
+        $this->importProductSchedulersRepository->persist($data);
+
+        $request->session()->flash('success', "The CSV Product list has uploaded successfully! The products will be imported soon!");
+        return redirect()->route('admin.products.index');
+    }
+
+
     private function getCategories()
     {
         $this->categories = $this->categoryRepository->getAll()->pluck('name', 'id');
-    }
-
-    public function importProduct()
-    {
-
     }
 
 }

@@ -20,7 +20,8 @@
             </form>
         </div>
         <div class="col-md-6">
-            <a href="{{ route('admin.products.create') }}" class="btn btn-primary float-right">New Product</a>
+            <a href="{{ route('admin.products.import_csv') }}" class="btn btn-warning float-right">Import Products CSV</a>
+            <a href="{{ route('admin.products.create') }}" class="btn btn-primary float-right mr-1">New Product</a>
         </div>
     </div>
     <div class="clearfix"></div>

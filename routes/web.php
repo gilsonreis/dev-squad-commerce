@@ -23,6 +23,8 @@ Route::post('admin/logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get("/import-products-csv", '\App\Admin\Http\Controllers\ProductController@importProduct')->name('products.import_csv');
+    Route::post("/import-products-csv", '\App\Admin\Http\Controllers\ProductController@importProductStore')->name('products.import_csv_store');
     Route::get('/', '\App\Admin\Http\Controllers\DashboardController@index')->name('index');
     Route::get("/dashboard/teste", '\App\Admin\Http\Controllers\DashboardController@teste');
     Route::resource('products', '\App\Admin\Http\Controllers\ProductController');

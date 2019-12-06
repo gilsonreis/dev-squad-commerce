@@ -17,7 +17,7 @@ trait ImageUploadTrait
             mkdir(public_path($this->path), 0755, true);
         }
 
-        $filename = Str::snake($image->getClientOriginalName());
+        $filename = substr(uniqid(), 0, 10) . "_" . Str::snake($image->getClientOriginalName());
         $img = Image::make($image);
         $img->resize($w, $h, function ($constraint) {
             $constraint->aspectRatio();

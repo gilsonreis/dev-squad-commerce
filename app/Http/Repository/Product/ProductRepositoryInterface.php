@@ -12,4 +12,5 @@ interface ProductRepositoryInterface
     public function getAll(?string $search, int $maxItemsPerPage, array $order = ['title', 'asc']): LengthAwarePaginator;
     public function persist(array $data, int $id = null);
     public function destroy(Product $product): bool;
+    public function getProductBySlug(string $slug) : Product;
 }

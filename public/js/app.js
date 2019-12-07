@@ -38135,27 +38135,39 @@ var render = function() {
             [
               _c("div", { staticClass: "product-box2" }, [
                 _c("div", { staticClass: "media" }, [
-                  _c("a", { staticClass: "pull-left", attrs: { href: "#" } }, [
-                    product.photo
-                      ? _c("img", {
-                          staticClass: "img-responsive",
-                          attrs: {
-                            src: "/uploads/products/thumb/" + product.photo,
-                            alt: "product"
-                          }
-                        })
-                      : _c("img", {
-                          staticClass: "img-responsive",
-                          attrs: { src: "/images/no-image.png", alt: "product" }
-                        })
-                  ]),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "pull-left",
+                      attrs: { href: "/product/" + product.slug }
+                    },
+                    [
+                      product.photo
+                        ? _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/uploads/products/thumb/" + product.photo,
+                              alt: "product"
+                            }
+                          })
+                        : _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/images/no-image.png",
+                              alt: "product"
+                            }
+                          })
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "media-body" }, [
                     _c("div", { staticClass: "product-box2-content" }, [
                       _c("h3", [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _vm._v(_vm._s(product.title))
-                        ])
+                        _c(
+                          "a",
+                          { attrs: { href: "/product/" + product.slug } },
+                          [_vm._v(_vm._s(product.title))]
+                        )
                       ]),
                       _vm._v(" "),
                       _c("span", [_vm._v("$" + _vm._s(product.price))]),

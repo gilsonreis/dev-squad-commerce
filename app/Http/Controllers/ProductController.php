@@ -19,4 +19,12 @@ class ProductController extends Controller
     {
         return $this->productRepository->getAll(null, ProductRepository::MAX_ITEMS_PER_PAGE, ['created_at', 'desc']);
     }
+
+    public function show(Request $request, $slug)
+    {
+        $product = $this->productRepository->getProductBySlug($slug);
+        return view('product.show', [
+            'product' => $product
+        ]);
+    }
 }

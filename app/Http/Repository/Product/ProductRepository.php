@@ -40,4 +40,9 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return $product->delete();
     }
+
+    public function getProductBySlug(string $slug) : Product
+    {
+        return Product::where('slug', $slug)->first();
+    }
 }

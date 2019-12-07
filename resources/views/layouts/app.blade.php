@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield("title"){{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -88,7 +88,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                 <div class="logo-area">
-                                    <a href="index.html"><img class="img-responsive" src="{{ asset('theme/img/logo.png') }}" alt="logo"></a>
+                                    <a href="{{ route('home') }}"><img class="img-responsive" src="{{ asset('theme/img/logo.png') }}" alt="logo"></a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
@@ -97,23 +97,6 @@
                                         <input type="text" class="form-control" placeholder="Search Product" />
                                         <div class="input-group-btn">
                                             <div class="btn-group" role="group">
-                                                <div class="dropdown dropdown-lg">
-                                                    <button type="button" class="btn btn-metro dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span>All Categories</span><i class="fa fa-caret-up" aria-hidden="true"></i><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                        <ul class="sidenav-nav">
-                                                            <li><a href="#"><i class="flaticon-dress-1"></i>Women</a></li>
-                                                            <li><a href="#"><i class="flaticon-polo"></i>Men</a></li>
-                                                            <li><a href="#"><i class="flaticon-plug"></i>Electornics</a></li>
-                                                            <li><a href="#"><i class="flaticon-necklace"></i>Jewellery</a></li>
-                                                            <li><a href="#"><i class="flaticon-screen"></i>Computer</a></li>
-                                                            <li><a href="#"><i class="flaticon-headphones"></i>Head Phone</a></li>
-                                                            <li><a href="#"><i class="flaticon-transport"></i>Toys</a></li>
-                                                            <li><a href="#"><i class="flaticon-fashion"></i>Shoes</a></li>
-                                                            <li><a href="#"><i class="flaticon-dress"></i>Kid’s Wear</a></li>
-                                                            <li><a href="#"><i class="flaticon-technology"></i>Mobile</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
                                                 <button type="button" class="btn btn-metro-search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                             </div>
                                         </div>
@@ -124,77 +107,8 @@
                                 <ul class="header-cart-area">
                                     <li>
                                         <div class="cart-area">
-                                            <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a>
-                                            <ul>
-                                                <li>
-                                                    <div class="cart-single-product">
-                                                        <div class="media">
-                                                            <div class="pull-left cart-product-img">
-                                                                <a href="#">
-                                                                    <img class="img-responsive" alt="product" src="img/best-seller/4.jpg">
-                                                                </a>
-                                                            </div>
-                                                            <div class="media-body cart-content">
-                                                                <ul>
-                                                                    <li>
-                                                                        <h2><a href="#">Product Title Here</a></h2>
-                                                                        <h3><span>Code:</span> STPT600</h3>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>X 1</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>$49</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="trash" href="#"><i class="fa fa-trash-o"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="cart-single-product">
-                                                        <div class="media">
-                                                            <div class="pull-left cart-product-img">
-                                                                <a href="#">
-                                                                    <img class="img-responsive" alt="product" src="img/best-seller/5.jpg">
-                                                                </a>
-                                                            </div>
-                                                            <div class="media-body cart-content">
-                                                                <ul>
-                                                                    <li>
-                                                                        <h2><a href="#">Product Title Here</a></h2>
-                                                                        <h3><span>Code:</span> STPT460</h3>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>X 1</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>$75</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="trash" href="#"><i class="fa fa-trash-o"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <span><span>Sub Total</span></span><span>$124</span>
-                                                    <span><span>Discount</span></span><span>$30</span>
-                                                    <span><span>Vat(20%)</span></span><span>$18.8</span>
-                                                    <span><span>Sub Total</span></span><span>$112.8</span>
-                                                </li>
-                                                <li>
-                                                    <ul class="checkout">
-                                                        <li><a href="cart.html" class="btn-checkout"><i class="fa fa-shopping-cart" aria-hidden="true"></i>View Cart</a></li>
-                                                        <li><a href="check-out.html" class="btn-checkout"><i class="fa fa-share" aria-hidden="true"></i>Checkout</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
+                                            <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>0</span></a>
+
                                         </div>
                                     </li>
                                     <li>
@@ -243,19 +157,6 @@
                                                         </div>
                                                     </li>
                                                 </ul>
-                                                <h3 class="ctg-name-title">Category Name List</h3>
-                                                <ul class="sidenav-nav">
-                                                    <li><a href="shop1.html"><i class="flaticon-dress-1"></i>Women</a></li>
-                                                    <li><a href="shop2.html"><i class="flaticon-polo"></i>Men</a></li>
-                                                    <li><a href="shop3.html"><i class="flaticon-plug"></i>Electornics</a></li>
-                                                    <li><a href="shop4.html"><i class="flaticon-necklace"></i>Jewellery</a></li>
-                                                    <li><a href="shop5.html"><i class="flaticon-screen"></i>Computer</a></li>
-                                                    <li><a href="shop6.html"><i class="flaticon-headphones"></i>Head Phone</a></li>
-                                                    <li><a href="shop7.html"><i class="flaticon-transport"></i>Toys</a></li>
-                                                    <li><a href="shop1.html"><i class="flaticon-fashion"></i>Shoes</a></li>
-                                                    <li><a href="shop2.html"><i class="flaticon-dress"></i>Kid’s Wear</a></li>
-                                                    <li><a href="shop3.html"><i class="flaticon-technology"></i>Mobile</a></li>
-                                                </ul>
                                                 <!-- times-->
                                             </div>
                                             <span class="side-menu-open side-menu-trigger"><i class="fa fa-bars" aria-hidden="true"></i></span>
@@ -272,178 +173,22 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-4">
                             <div class="logo-area">
-                                <a href="index.html"><img class="img-responsive" src="img/logo.png" alt="logo"></a>
-                            </div>
-                            <div class="category-menu-area" id="category-menu-area-top">
-                                <h2 class="category-menu-title"><a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>Categories</h2>
-                                <ul class="category-menu-area-inner">
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-dress-1"></i>Women<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Women Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Women Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Women Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Women Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Women Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-polo"></i>Men<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Men Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Men Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Men Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Men Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Men Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-plug"></i>Electornics<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Electornics Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Electornics Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Electornics Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Electornics Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Electornics Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-necklace"></i>Jewellery<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Jewellery Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Jewellery Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Jewellery Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Jewellery Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Jewellery Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-screen"></i>Computer<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Computer Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Computer Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Computer Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Computer Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Computer Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-headphones"></i>Head Phone<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Head Phone Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Head Phone Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Head Phone Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Head Phone Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Head Phone Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-transport"></i>Toys<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Toys Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Toys Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Toys Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Toys Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Toys Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-fashion"></i>Shoes<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Shoes Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Shoes Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Shoes Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Shoes Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Shoes Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-dress"></i>Kid’s Wear<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Kid’s Wear Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Kid’s Wear Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Kid’s Wear Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Kid’s Wear Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Kid’s Wear Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="flaticon-technology"></i>Mobile<span><i class="flaticon-next"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop1.html">Mobile Sub Title 1</a></li>
-                                            <li><a href="shop1.html">Mobile Sub Title 2</a></li>
-                                            <li><a href="shop1.html">Mobile Sub Title 3</a></li>
-                                            <li><a href="shop1.html">Mobile Sub Title 4</a></li>
-                                            <li><a href="shop1.html">Mobile Sub Title 5</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                <a href="{{ route('home') }}"><img class="img-responsive" src="{{ asset('theme/img/logo.png') }}" alt="logo"></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-8">
                             <div class="main-menu-area">
                                 <nav>
                                     <ul>
-                                        <li><a href="#">Home</a>
-                                            <ul class="mega-menu-area2">
-                                                <li>
-                                                    <a href="index.html">Home 1</a>
-                                                    <a href="index2.html">Home 2</a>
-                                                    <a href="index3.html">Home 3</a>
-                                                    <a href="index4.html">Home 4</a>
-                                                    <a href="index5.html">Home 5</a>
-                                                </li>
-                                                <li>
-                                                    <a href="index6.html">Home 6</a>
-                                                    <a href="index7.html">Home 7</a>
-                                                    <a href="index8.html">Home 8</a>
-                                                    <a href="index9.html">Home 9</a>
-                                                    <a href="index10.html">Home 10</a>
-                                                </li>
-                                            </ul>
+                                        <li><a href="{{ route("home") }}">Home</a>
+
                                         </li>
                                         <li><a href="about.html">About</a></li>
                                         <li><a href="#">Blog</a>
-                                            <ul>
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Single Blog</a></li>
-                                                <li class="has-child-menu"><a href="#">Demo</a>
-                                                    <ul class="thired-level">
-                                                        <li><a href="#">Demo 1</a></li>
-                                                        <li><a href="#">Demo 2</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
+
                                         </li>
                                         <li class="active"><a href="#">Pages</a>
-                                            <ul class="mega-menu-area">
-                                                <li>
-                                                    <a href="index.html">Home 1</a>
-                                                    <a href="index2.html">Home 2</a>
-                                                    <a href="index3.html">Home 3</a>
-                                                    <a href="index4.html">Home 4</a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-blog.html">Single Blog 2</a>
-                                                    <a href="portfolio1.html">Portfolio 1</a>
-                                                    <a href="portfolio2.html">Portfolio 2</a>
-                                                    <a href="shop1.html">Shop 1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop2.html">Shop 2</a>
-                                                    <a class="active" href="shop3.html">Shop 3</a>
-                                                    <a href="shop4.html">Shop 4</a>
-                                                    <a href="shop5.html">Shop 5</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop6.html">Shop 6</a>
-                                                    <a href="shop7.html">Shop 7</a>
-                                                    <a href="product-details1.html">Product Details 1</a>
-                                                    <a href="product-details2.html">Product Details 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login-registration.html">Login Registration</a>
-                                                    <a href="my-account.html">My Account</a>
-                                                    <a href="wishlist.html">Wishlist</a>
-                                                    <a href="cart.html">Cart</a>
-                                                </li>
-                                                <li>
-                                                    <a href="check-out.html">Check Out</a>
-                                                    <a href="order-history.html">Order History</a>
-                                                    <a href="order-details.html">Order Details</a>
-                                                    <a href="404.html">404</a>
-                                                </li>
-                                            </ul>
+
                                         </li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>

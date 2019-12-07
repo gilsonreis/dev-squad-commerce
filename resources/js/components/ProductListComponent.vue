@@ -4,14 +4,14 @@
             <div class="col-lg-12 col-md-12 col-sm-4 col-xs-12" v-for="product in products">
                 <div class="product-box2">
                     <div class="media">
-                        <a class="pull-left" href="#">
+                        <a class="pull-left" :href="'/product/' + product.slug">
                             <img class="img-responsive" v-if="product.photo"
                                  :src="'/uploads/products/thumb/' + product.photo" alt="product"/>
                             <img class="img-responsive" v-else src="/images/no-image.png" alt="product"/>
                         </a>
                         <div class="media-body">
                             <div class="product-box2-content">
-                                <h3><a href="#">{{ product.title }}</a></h3>
+                                <h3><a :href="'/product/' + product.slug">{{ product.title }}</a></h3>
                                 <span>${{ product.price }}</span>
                                 <p>{{ product.description }}</p>
                             </div>

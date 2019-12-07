@@ -32,3 +32,5 @@ Route::prefix('api')->name('api.')->group(function () {
     Route::get('/categories', 'CategoryController@index')->name("category.index");
     Route::get('/products', 'ProductController@index')->name("product.index");
 });
+
+Route::get("/product/{slug}", 'ProductController@show')->name("product.index");
